@@ -1,24 +1,36 @@
-import type { AppProps } from 'next/app';
+import React from 'react';
 import Head from 'next/head';
+import { NextSeo } from 'next-seo';
+import { AppProps } from 'next/app';
+import { ThemeProvider } from 'styled-components';
 
-import GlobalStyles from '@/styles/global';
+import theme from 'styles/theme';
+import GlobalStyle from 'styles/global.styles';
 
-export default function App({ Component, pageProps }: AppProps) {
+const App = ({ Component, pageProps }: AppProps) => {
   return (
-    <>
+    <ThemeProvider theme={theme}>
       <Head>
-        <title>Spada - Boilerplate</title>
-        <link rel='icon' href='/favicon.ico' />
-        <link rel='apple-touch-icon' href='/favicon.ico' />
-        <link rel='manifest' href='/manifest.json' />
-        <meta name='description' content='A simple TypeScript React project' />
-        <meta
-          name='viewport'
-          content='minimum-scale=1, initial-scale=1, width=device-width, shrink-to-fit=no, viewport-fit=cover'
-        />
+        <meta name='theme-color' content='#06092B' />
+        <link rel='shortcut icon' href='/img/icon-512.png' />
+        <link rel='apple-touch-icon' href='/img/icon-512.png' />
       </Head>
-      <GlobalStyles />
+      <NextSeo
+        title='Sacoa Cashless System'
+        description='Evolve your business with a system designed by operators for operators!'
+        canonical='https://lanevo.com.br/'
+        openGraph={{
+          url: 'https://lanevo.com.br/',
+          title: 'Sacoa Cashless System',
+          description: 'Evolve your business with a system designed by operators for operators!',
+          site_name: 'Sacoa Cashless System',
+          locale: 'en_US',
+        }}
+      />
+      <GlobalStyle />
       <Component {...pageProps} />
-    </>
+    </ThemeProvider>
   );
-}
+};
+
+export default App;
